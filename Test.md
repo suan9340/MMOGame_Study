@@ -24,6 +24,30 @@ ServerSession, Packet폴더
 
 ---   
 
-~~이제 유니티에서 에러가 나는데~~
+~~이제 유니티에서 나는 에러를 하나씩 고쳐야한~~
 
-8.57
+
+**GenPackets**
+
+
+```
+public ArraySegment<byte> Write()
+	{
+		ArraySegment<byte> segment = SendBufferHelper.Open(4096);
+		ushort count = 0;
+
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes((ushort)PacketID.S_BroadcastLeaveGame), 0, segment.Array, segment.Offset + count, sizeof(ushort));
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes(this.playerId), 0, segment.Array, segment.Offset + count, sizeof(int));
+		count += sizeof(int);
+
+		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
+
+		return SendBufferHelper.Close(count);
+	}
+```    
+      
+메세지를 직렬화 하여 네트워크를 통해 전송할 수 있도록 BitConverter를 사용해서 바이트 배열 세그먼트로 반환을 하고 있다.   
+Array.Copy로 넣기.
+
