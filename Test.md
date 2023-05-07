@@ -29,25 +29,13 @@ ServerSession, Packet폴더
 
 **GenPackets**
 
+![image](https://user-images.githubusercontent.com/77601060/236681320-83f76d54-750f-4c03-88e6-5b2afdd91d26.png)
 
-```
-public ArraySegment<byte> Write()
-	{
-		ArraySegment<byte> segment = SendBufferHelper.Open(4096);
-		ushort count = 0;
-
-		count += sizeof(ushort);
-		Array.Copy(BitConverter.GetBytes((ushort)PacketID.S_BroadcastLeaveGame), 0, segment.Array, segment.Offset + count, sizeof(ushort));
-		count += sizeof(ushort);
-		Array.Copy(BitConverter.GetBytes(this.playerId), 0, segment.Array, segment.Offset + count, sizeof(int));
-		count += sizeof(int);
-
-		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
-
-		return SendBufferHelper.Close(count);
-	}
-```    
       
 메세지를 직렬화 하여 네트워크를 통해 전송할 수 있도록 BitConverter를 사용해서 바이트 배열 세그먼트로 반환을 하고 있다.   
 Array.Copy로 넣기.
+
+---   
+Server에서 PacketForamt.cs 를 형식에 맞도록 수정한다.  
+PacketFormat은 클라이언트와 서버의 통신 시스템용 패킷을 생성해주는 내용이다.  
 
