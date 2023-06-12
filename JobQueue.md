@@ -1,7 +1,13 @@
-JobQueue 코드
-GameRoom을 JobSerializer상속받게 되며 Lock이 필요없어진다.
 
-Push 기능을 만들었으므로 사용하기 위해 코드 수정이 주로 이루어짐
+GameRoom에 JobSerializer상속받음  
+-> lock이 필요없어진다. (lock을 다 지우기) (FindPlayer 에는 todo로 표시해두기)
+
+각각의 함수들이 사용을 하던 부분으로 가서 다 push하는 방식으로 바꾸기   
+
+
+---  
+
+Push 기능을 만들었으므로 코드 수정을 하자 !
 
 ```csharp
 using System;
