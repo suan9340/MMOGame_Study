@@ -1,4 +1,8 @@
 JobQueue 코드
+GameRoom을 JobSerializer상속받게 되며 Lock이 필요없어진다.
+
+Push 기능을 만들었으므로 사용하기 위해 코드 수정이 주로 이루어짐
+
 ```csharp
 using System;
 using System.Collections.Generic;
